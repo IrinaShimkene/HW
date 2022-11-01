@@ -1,0 +1,9 @@
+per_cent = {'ТКБ': 5.6, 'СКБ': 5.9, 'ВТБ': 4.28, 'СБЕР': 4.0}
+money = input("Vvedite summu deneg na depozite  ")
+money = float(money)
+procent = per_cent.values()
+deposit = list(map((money/100).__mul__, procent))
+rounded = list(map(round, deposit))
+max_number = round(max(deposit))
+print("Za god vi poluchite deposit =", rounded)
+print("Maksimalnaya summa deposita =", max_number)
