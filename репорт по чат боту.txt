@@ -1,0 +1,12 @@
+В первом приближении видим следующие ошибки при взаимодействии с ботом: евро не читается, доллар в ключах записан как юэсдэ.
+Исправляем юэсдэ на USD config.py line 5
+
+При выводе валюты всё равно выдает неверный результат ("Что-то пошло не так с *валюта*"). Для устранения исправляем файл extensions.py line 34 надо json.loads(r.content)[keys[base]]. Иначе при указании keys[quote] загружает не те данные и выдает ошибку. Также extensions.py line 33 надо меняем местами в api-запросе {base_ticker} и {quote_ticker}, а то конвертирует наоборот.
+
+Нет подсчета общей суммы: только курс за 1 единицу валюты (app.py line 45). Вводим новую переменную total_amount и выводим результат умножения amount на total_base:
+        total_amount = total_base * float(amount)
+        text = f'Переводим {quote} в {base}\n{amount} {quote} = {total_amount} {base}'
+
+
+Остальное: указываем TOKEN капсом файл config.py line 1, app.py line line 2, 5
+app.py line 49 (non_stop = True)
